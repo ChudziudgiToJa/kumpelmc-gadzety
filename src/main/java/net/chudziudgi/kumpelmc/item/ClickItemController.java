@@ -15,13 +15,24 @@ import org.bukkit.potion.PotionEffectType;
 
 public class ClickItemController implements Listener {
 
-    private ItemUtil itemUtil;
+    private final ItemUtil itemUtil;
+    private final CooldownManager cooldownManager;
+
+    public ClickItemController(ItemUtil itemUtil, CooldownManager cooldownManager) {
+        this.itemUtil = itemUtil;
+        this.cooldownManager = cooldownManager;
+    }
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
         if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+
+            if (cooldownManager.hasCooldown(player)){
+                ChatUtil.sendMessage(player,"&cBłąd: Odczekaj chwile przed następnym użyciem gadżetu");
+                return;
+            }
 
             //SPEED
             if (player.getInventory().getItemInMainHand().getType() == Material.SUGAR && player.getInventory().getItemInMainHand().hasItemMeta() && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatUtil.fixColor(itemUtil.getSpeedItemName()))) {
@@ -31,6 +42,7 @@ public class ClickItemController implements Listener {
                 itemUtil.itemController(player);
                 player.playSound(player.getLocation(), Sound.ENTITY_CAT_HISS, 1f, 1f);
                 ChatUtil.sendTitle(player, "", "&aPrawidłowo użyto gadzetu!", 5, 10, 5);
+                cooldownManager.addCooldown(player,60);
                 return;
             }
             //ROCKET
@@ -41,6 +53,7 @@ public class ClickItemController implements Listener {
                 itemUtil.itemController(player);
                 player.playSound(player.getLocation(), Sound.ENTITY_CAT_HISS, 1f, 1f);
                 ChatUtil.sendTitle(player, "", "&aPrawidłowo użyto gadzetu!", 5, 10, 5);
+                cooldownManager.addCooldown(player,60);
                 return;
             }
 
@@ -52,6 +65,7 @@ public class ClickItemController implements Listener {
                 itemUtil.itemController(player);
                 player.playSound(player.getLocation(), Sound.ENTITY_CAT_HISS, 1f, 1f);
                 ChatUtil.sendTitle(player, "", "&aPrawidłowo użyto gadzetu!", 5, 10, 5);
+                cooldownManager.addCooldown(player,60);
                 return;
             }
 
@@ -67,6 +81,7 @@ public class ClickItemController implements Listener {
                 itemUtil.itemController(player);
                 player.playSound(player.getLocation(), Sound.ENTITY_CAT_HISS, 1f, 1f);
                 ChatUtil.sendTitle(player, "", "&aPrawidłowo użyto gadzetu!", 5, 10, 5);
+                cooldownManager.addCooldown(player,60);
                 return;
             }
             // fly
@@ -81,6 +96,7 @@ public class ClickItemController implements Listener {
                 itemUtil.itemController(player);
                 player.playSound(player.getLocation(), Sound.ENTITY_CAT_HISS, 1f, 1f);
                 ChatUtil.sendTitle(player, "", "&aPrawidłowo użyto gadzetu!", 5, 10, 5);
+                cooldownManager.addCooldown(player,60);
                 return;
             }
             // JUMP
@@ -95,6 +111,8 @@ public class ClickItemController implements Listener {
                 itemUtil.itemController(player);
                 player.playSound(player.getLocation(), Sound.ENTITY_CAT_HISS, 1f, 1f);
                 ChatUtil.sendTitle(player, "", "&aPrawidłowo użyto gadzetu!", 5, 10, 5);
+                cooldownManager.addCooldown(player,60);
+                return;
             }
         }
     }
