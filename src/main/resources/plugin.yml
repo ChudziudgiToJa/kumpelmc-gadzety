@@ -1,0 +1,6 @@
+name: kmc-customitems
+version: '${project.version}'
+main: net.chudziudgi.kumpelmc.McPlugin
+api-version: '1.17'
+commands:
+  nadajprzedmioty:
