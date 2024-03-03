@@ -1,19 +1,16 @@
-package net.chudziudgi.kumpelmc.item;
+package net.chudziudgi.kumpelmc;
 
-import net.chudziudgi.kumpelmc.util.ChatUtil;
-import net.chudziudgi.kumpelmc.util.ItemEnum;
-import net.chudziudgi.kumpelmc.util.ItemUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class GiveCustomItemCommand implements CommandExecutor {
-    private final ItemMenu itemMenu;
+public class GadgetGiveCommand implements CommandExecutor {
+    private final GadgetInventory gadgetInventory;
 
-    public GiveCustomItemCommand(ItemMenu itemMenu) {
-        this.itemMenu = itemMenu;
+    public GadgetGiveCommand(GadgetInventory gadgetInventory) {
+        this.gadgetInventory = gadgetInventory;
     }
 
     @Override
@@ -27,7 +24,7 @@ public class GiveCustomItemCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "Nie posiadasz permisji do użycia tej komendy");
             return false;
         }
-        itemMenu.createInventory(player);
+        gadgetInventory.createInventory(player);
         return true;
     }
 }

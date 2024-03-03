@@ -1,6 +1,6 @@
-name: kmc-customitems
+name: kumplemc-gadgets
 version: '${project.version}'
-main: net.chudziudgi.kumpelmc.McPlugin
+main: net.chudziudgi.kumpelmc.GadgetPlugin
 api-version: '1.17'
 commands:
   nadajprzedmioty:
