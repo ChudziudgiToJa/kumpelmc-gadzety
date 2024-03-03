@@ -26,10 +26,6 @@ public class GadgetUseController implements Listener {
         if (!action.equals(Action.RIGHT_CLICK_AIR) && !action.equals(Action.RIGHT_CLICK_BLOCK))
             return;
 
-        // METHOD TO APPLY COOLDOWN
-        player.setCooldown(Material.AIR, 20);
-
-        //EXAMPLE GADGET METHOD
         EquipmentSlot hand = event.getHand(); // DETERMINE USED HAND: CAN BE MAIN OR OFFHAND
         assert hand != null;
         ItemStack item = player.getEquipment().getItem(hand);
