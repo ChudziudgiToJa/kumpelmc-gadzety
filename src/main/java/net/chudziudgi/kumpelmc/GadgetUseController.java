@@ -26,10 +26,14 @@ public class GadgetUseController implements Listener {
         if (!action.equals(Action.RIGHT_CLICK_AIR) && !action.equals(Action.RIGHT_CLICK_BLOCK))
             return;
 
+        if (event.getClickedBlock() != null)
+            return;
+
         EquipmentSlot hand = event.getHand(); // DETERMINE USED HAND: CAN BE MAIN OR OFFHAND
         assert hand != null;
         ItemStack item = player.getEquipment().getItem(hand);
         ItemMeta itemMeta = item.getItemMeta();
+        assert itemMeta != null;
         PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
         boolean hasGadgetNamespace = persistentDataContainer.has(GADGETS_NAMESPACE);
 
@@ -42,7 +46,7 @@ public class GadgetUseController implements Listener {
         if (player.hasCooldown(type))
             return;
 
-        int seconds = 20 * 3;
+        int seconds = 20 * 10;
         player.setCooldown(type, seconds);
 
         // THAT REMOVES ONE ITEM FROM HAND
