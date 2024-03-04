@@ -5,13 +5,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Consumer;
+import org.bukkit.util.Vector;
 
 import java.util.Arrays;
 
@@ -73,7 +78,35 @@ public enum Gadget {
                         .filter(it -> it != player)
                         .forEach(target -> player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 30 * 3, 3)));
             }
-    );
+    ),
+
+    INSTANT_ARROW(
+            "Natychmiastowa strzała",
+            "Wystrzeliwuje strzałe natychmiast!",
+            Material.TIPPED_ARROW,
+            player -> {
+                Vector direction = player.getLocation().getDirection();
+                Arrow arrow = player.getWorld().spawn(player.getEyeLocation(), Arrow.class);
+
+                arrow.setCritical(true);
+                arrow.setVelocity(direction.multiply(4));
+
+            }
+    ),
+    DYNAMITE(
+            "DYNAMIT",
+            "Wystrzeliwuje dynamit!",
+            Material.RED_CANDLE,
+            player -> {
+                Vector direction = player.getLocation().getDirection();
+                TNTPrimed tntPrimed = player.getWorld().spawn(player.getEyeLocation(), TNTPrimed.class);
+
+                tntPrimed.setYield(5.0F);
+                tntPrimed.setFuseTicks(3);
+                tntPrimed.setVelocity(direction.multiply(3));
+            }
+    )
+    ;
 
     public static final NamespacedKey GADGETS_NAMESPACE =
             new NamespacedKey("gadgets-plugin", "gadgets-namespace");

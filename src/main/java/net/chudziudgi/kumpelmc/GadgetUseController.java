@@ -38,8 +38,12 @@ public class GadgetUseController implements Listener {
 
         event.setCancelled(true);
 
+        Material type = item.getType();
+        if (player.hasCooldown(type))
+            return;
+
         int seconds = 20 * 3;
-        player.setCooldown(item.getType(), seconds);
+        player.setCooldown(type, seconds);
 
         // THAT REMOVES ONE ITEM FROM HAND
         item.subtract();
