@@ -107,6 +107,18 @@ public enum Gadget {
             Material.GLOW_BERRIES,
             player -> player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 10, 200))
     ),
+    HASTE(
+            "&b&n✪&f&l Ciastko kopacz",
+            "&e★ &7Ten przedmiot nadaje efekt szybkiego kopania na 2min",
+            Material.COOKIE,
+            player -> player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 2, 20*120))
+    ),
+    DELPHIN(
+            "&b&n✪&f&l Płetwa delfina",
+            "&e★ &7Ten przedmiot nadaje efekt szybkiego pływania na 1min",
+            Material.KELP,
+            player -> player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 2, 20*60))
+    ),
     BLIDNESS(
             "&b&n✪&f&l Ślepota",
             "&e★ &7Ten przedmiot nadaje wszystkim efekt Oślepienia w obrębie 5 bloków. na 5sek",
