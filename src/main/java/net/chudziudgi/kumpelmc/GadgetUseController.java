@@ -56,8 +56,7 @@ public class GadgetUseController implements Listener {
         if (!egg.getItem().getItemMeta().getPersistentDataContainer().has(GADGETS_NAMESPACE))
             return;
 
-        Block hitBlock = event.getHitBlock();
-        Location location = hitBlock.getLocation();
+        Location location = event.getEntity().getLocation();
 
         RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager regionManager = regionContainer.get(BukkitAdapter.adapt(egg.getWorld()));
