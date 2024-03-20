@@ -5,10 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.TNTPrimed;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -158,6 +155,19 @@ public enum Gadget {
                 egg.setItem(itemStack);
 
                 egg.setVelocity(player.getLocation().getDirection().multiply(3.0));
+            }
+    ),
+    COBWEB("&b&n✪&f&l Pajęczy strzał",
+            "&e★ &7Jak wyląduje tworzy pajęczyna.",
+            Material.SNOWBALL,
+            player -> {
+                Snowball snowball = player.getWorld().spawn(player.getEyeLocation(), Snowball.class);
+                ItemStack itemStack = new ItemStack(Material.SNOWBALL);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.getPersistentDataContainer().set(new NamespacedKey("gadgets-plugin", "gadgets-namespace"), PersistentDataType.STRING, "COBWEB");
+                itemStack.setItemMeta(itemMeta);
+                snowball.setItem(itemStack);
+                snowball.setVelocity(player.getLocation().getDirection().multiply(1.0));
             }
     ),
     TANK(
